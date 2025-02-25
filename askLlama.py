@@ -8,7 +8,7 @@ client = OpenAI(
 )
 
 # Option 1: Simple LLM call that returns plain text response
-def ask_llm(question: str, model: str = "llama3.2") -> str:
+def ask_llm(question: str, model: str = "llama3-gradient") -> str:
     """
     Ask a question to the LLM and return the response as a text string.
     """
@@ -21,7 +21,7 @@ def ask_llm(question: str, model: str = "llama3.2") -> str:
     return chat_completion.choices[0].message.content
 
 # Option 2: LLM call that returns structured JSON output parsed by a Pydantic model
-def ask_llm_with_schema(question: str, response_model: type(BaseModel), model: str = "llama3.1:8b", temperature: float = 0):
+def ask_llm_with_schema(question: str, response_model: type(BaseModel), model: str = "llama3-gradient", temperature: float = 0):
     """
     Ask a question to the LLM and parse the JSON response using the provided Pydantic model.
     Parameters:
@@ -59,7 +59,7 @@ def ask_llm_with_schema(question: str, response_model: type(BaseModel), model: s
 if __name__ == "__main__":
     # Option 1: Basic text response
     print("=== Option 1: Simple Chat ===")
-    response_text = ask_llm("Say this is a test", model="llama3.2")
+    response_text = ask_llm("Say this is a test", model="llama3-gradient")
     print(response_text)
 
     # Option 2: Structured response using Pydantic models
@@ -79,5 +79,5 @@ if __name__ == "__main__":
         "is_available should be true if they want to hang out, false if they're busy."
     )
     print("\n=== Option 2: Structured Chat Response ===")
-    structured_response = ask_llm_with_schema(friend_question, FriendList, model="llama3.2", temperature=0)
+    structured_response = ask_llm_with_schema(friend_question, FriendList, model="llama3-gradient", temperature=0)
     print(structured_response)
